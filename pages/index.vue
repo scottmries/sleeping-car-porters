@@ -14,6 +14,9 @@
         <nuxt-link to="/cues" class="button--green">
           Cues
         </nuxt-link>
+        <nuxt-link to="/instructions" class="button--green">
+          Instructions
+        </nuxt-link>
       </div>
     </div>
   </div>
