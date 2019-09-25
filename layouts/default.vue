@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="aspect-ratio-container">
     <nuxt />
   </div>
 </template>
@@ -51,5 +51,13 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.aspect-ratio-container {
+    width: 100%;
+    padding-top: 56.25%;
+    position: relative;
+    overflow: hidden;
+
 }
 </style>

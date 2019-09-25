@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div>
+    <div class="flex flex-col justify-center h-screen text-center">
       <h1 class="title">
         Sleeping Car Porters
       </h1>
@@ -8,15 +8,23 @@
         Projection design
       </h2>
       <div class="links">
-        <nuxt-link to="/zodiac" class="button--green">
-          Zodiac cipher
-        </nuxt-link>
-        <nuxt-link to="/cues" class="button--green">
-          Cues
-        </nuxt-link>
-        <nuxt-link to="/instructions" class="button--green">
-          Instructions
-        </nuxt-link>
+        <div class="mb-4">
+          <nuxt-link to="/zodiac" class="button--green mx-2">
+            Cipher
+          </nuxt-link>
+          <nuxt-link to="/cues" class="button--green mx-2">
+            Cues
+          </nuxt-link>
+          <nuxt-link to="/dmx" class="button--green mx-2">
+            DMX
+          </nuxt-link>
+        </div>
+        <div>
+          <nuxt-link to="/controls" class="button--green">
+            Controls
+          </nuxt-link>
+        </div>
+
       </div>
     </div>
   </div>
