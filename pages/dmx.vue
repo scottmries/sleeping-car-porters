@@ -9,7 +9,6 @@
     </controls>
 </template>
 <script>
-    import controls from '~/components/controls'
     export default {
         data() {
             return {
