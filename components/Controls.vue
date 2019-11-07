@@ -12,7 +12,6 @@ export default {
     },
     methods: {
         keyup(e) {
-            console.log(e)
             this.$emit('keyup', e)
         }
     }

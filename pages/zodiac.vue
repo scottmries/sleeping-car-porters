@@ -61,7 +61,6 @@
                         }
                         break
                     case 'Digit0':
-                        console.log(e.code)
                         this.xSpeedMultiplier = 1
                         break
                     default:
