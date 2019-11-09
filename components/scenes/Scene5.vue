@@ -14,9 +14,15 @@
 </template>
 
 <script>
-import animatedText from '~/components/Scene5Text'
+import animatedText from '~/components/cues/Scene5/text'
+import scene from '~/components/scenes/Scene'
+
 export default {
+    extends: scene,
     components: {animatedText},
+    created() {
+        console.log('scene 5')
+    },
     data() {
         return {
             actives: [],
