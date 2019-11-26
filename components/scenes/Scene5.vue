@@ -1,58 +1,18 @@
 <template>
-    <div class="h-full w-full" @click="advance">
-        <div class="relative">
-            <animatedText v-for="(text, index) in texts" :key="index"
-                :title="text.title"
-                :heading="text.heading"
-                :active="isActive(index)"
-                :paused="isPaused(index)"
-                :black="index % 2"
-                v-show="isShowing(index)"
-                ></animatedText>
-        </div>
-    </div>
+    <component :is="currentCue"></component>
 </template>
 
 <script>
-import animatedText from '~/components/cues/Scene5/text'
 import scene from '~/components/scenes/Scene'
+import Numeral5 from '~/components/numerals/5'
 
 export default {
     extends: scene,
-    components: {animatedText},
-    created() {
-        console.log('scene 5')
-    },
+    components: { Numeral5 },
     data() {
         return {
-            actives: [],
-            pauseds: [],
-            showeds: [],
-            firstActive: 0,
-            firstPaused: 0,
-            firstShowed: 0,
-            lastAction: 'paused',
-            texts: [
-                {
-                    title: "The Texas Star - March 1881",
-                    heading: "The Kid Tells All! Exclusive Jail Interview"
-                },
-                {
-                    heading: "STOLEN CATTLE IN MY BED"
-                },
-                {
-                    heading: "FED HIM TEQUILA"
-                },
-                {
-                    heading: "BOTH SIDES GUILTY"
-                },
-                {
-                    heading: "SLIP ME A GUN"
-                },
-                {
-                    heading: "I PRAYED EVERY DAY"
-                }
-            ]
+            cues: [ Numeral5 ],
+            sceneNumber: 5
         }
     },
     methods: {

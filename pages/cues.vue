@@ -1,10 +1,13 @@
 <template>
-    <div class="container">
+    <div class="container text-white">
         <component 
             v-bind:is="sceneName"
             :awaiting-next-cue="awaitingNextCue"
             :awaiting-prev-cue="awaitingPrevCue"
+            :awaiting-next-action="awaitingNextAction"
+            :set-cue="cueNumber"
             @cue-updated="cuesUpdated"
+            @action-updated="actionUpdated"
             ></component>
         <controls @keyup="keyup"></controls>
     </div>
@@ -31,7 +34,9 @@ export default {
         return {            
             awaitingNextCue: false,
             awaitingPrevCue: false,
-            sceneNumber: 0
+            awaitingNextAction: false,
+            sceneNumber: 0,
+            cueNumber: 0
         }
     },
     computed: {
@@ -39,15 +44,15 @@ export default {
             return this.sceneNumber > 0 && this.sceneNumber < 7 ? 'scene' + this.sceneNumber : black
         }
     },
-    mounted () {
-        // this.initThree();
-    },
     methods: {
         keyup(e) {
-            console.log(e)
             const numbers = [...Array(10).keys()].map(key => key.toString())
+            const cueIndices = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']
             if(numbers.indexOf(e.key) > -1){
                 this.sceneNumber = e.key
+            }
+            if(cueIndices.indexOf(e.key) > -1) {
+                this.cueNumber = cueIndices.indexOf(e.key)
             }
             switch(e.key) {
                 case 'ArrowLeft':
@@ -56,14 +61,25 @@ export default {
                 case 'ArrowRight':
                     this.awaitingNextCue = true
                     break
+                case 'n':
+                    this.awaitingNextAction = true
+                    break
                 default:
-                    console.log(e)
+                    console.log('uncaught key', e.key)
             }
         },
         cuesUpdated() {
             this.awaitingNextCue = false
             this.awaitingPreviousCue = false
+        },
+        actionUpdated() {
+            this.awaitingNextAction = false
         }
     }
 }
 </script>
+<style scoped>
+    .container {
+        max-width: none;
+    }
+</style>

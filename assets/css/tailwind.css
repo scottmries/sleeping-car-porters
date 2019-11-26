@@ -36,3 +36,40 @@ body {
   right: 0;
   /* cursor: none; */
 }
+
+.numeral {
+  @apply flex justify-center items-center w-full;
+  & svg {
+    fill: #ccc;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 100;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation-fill-mode: forwards;
+  animation-name: fadein; 
+  animation-duration: 2s;
+}
+
+.fade-out {
+  animation-fill-mode: forwards;
+  animation-name: fadeout;
+  animation-duration: 2s;
+}

@@ -1,13 +1,23 @@
 <template>
-    <div>4</div>
+    <component :is="currentCue" :awaitingTransform="awaitingTransform"></component>
 </template>
 <script>
 import scene from '~/components/scenes/Scene'
+import Numeral4 from '~/components/numerals/4'
 
 export default {
     extends: scene,
-    created() {
-        console.log('scene 4')
+    components: { Numeral4 },
+    data() {
+        return {
+            cues: [ Numeral4, Numeral4 ],
+            sceneNumber: 4
+        }
+    },
+    computed: {
+        awaitingTransform() {
+            return this.cueIndex === 1
+        }
     }
 }
 </script>
