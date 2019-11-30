@@ -17,13 +17,15 @@ import Moon from '~/components/cues/CowboyMoon'
 import Black from '~/components/scenes/Black'
 import Camera from '~/components/cues/Camera'
 import Counting from '~/components/cues/Counting'
+import UnforgivingForest from '~/components/cues/UnforgivingForest.vue'
 
 export default {
     extends: scene,
-    components: { Numeral2, Cipher, Moon, Black, Counting },
+    components: { Numeral2, Cipher, Moon, Black, Counting, UnforgivingForest },
     data() {
         return {
-            cues: [ 'Numeral2', 'Black', 'Cipher', 'Cipher', 'Moon', 'Moon', 'Moon', 'Black', 'Counting'],
+            cues: [ 'Numeral2', 'Black', 'Cipher', 'Cipher', 'Moon', 'Moon', 'Moon', 'Black', 'Counting', 
+            'UnforgivingForest'],
             sceneNumber: 2,
             cueIndex: 0
         }

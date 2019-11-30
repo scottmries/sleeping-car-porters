@@ -1,23 +1,26 @@
 <template>
-    <component :is="currentCue"></component>
+    <component 
+        :is="currentCue"
+        :awaiting-next-action="awaitingNextAction"
+        @action-updated="actionUpdated"></component>
 </template>
 
 <script>
 import scene from '~/components/scenes/Scene'
 import Numeral5 from '~/components/numerals/5'
+import Camera from '~/components/cues/BillyCamera'
 
 export default {
     extends: scene,
-    components: { Numeral5 },
+    components: { Numeral5, Camera },
     data() {
         return {
-            cues: [ Numeral5 ],
+            cues: [ Numeral5, Camera ],
             sceneNumber: 5
         }
     },
     methods: {
         activate(index) {
-            console.log(index)
             this.actives.push(index)
         },
         pause(index) {

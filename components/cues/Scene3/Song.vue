@@ -1,17 +1,35 @@
 <template>
-    <div>
-        <div class="text-white text-xl flex justify-center align-end">
+    <div class="flex flex-col justify-end h-full text-3xl">
+        <div class="text-white flex justify-center align-end">
             <div>
-                <div v-html="lyric"></div>
+                <div class="relative">
+                    <template v-for="(syllable, index) in lyric">
+                        <span class="text-white" :key="index" :class="{ 'current': index === syllableInCurrentLyricIndex }">{{ syllable }}</span>
+                    </template>
+                    <div style="opacity: 1;">
+                        <div 
+                            class="relative"
+                            style="opacity: 1; background: red;" >
+                                <span v-html="previousSyllables" style="display: inline-block;" ref="previous-syllable-width"></span>
+                            <span v-html="syllable" 
+                                style="opacity: 1; background: blue; display: inline-block;" 
+                                ref="syllable-width"></span>
+                        </div>
+                    </div>
+                    <div class="absolute left-0 ball-container" 
+                        :style="`transform: translateX(${ ballXOffset }px)`">
+                            <div class="bg-yellow rounded-full ball" :class="{ 'bouncing': bouncing }"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div>
-            <div v-html="syllable"></div>
+
         </div>
     </div>
 </template>
 
 <script>
+    // fix the fast the lyric after the last breaks
+
     // draw both the current syllable and the complete current lyric
     // get the window location of the current lyric
     // the location of where the ball lands is the running widths of all the previous lyrics plus half the width of the current width plus the location of the lyric
@@ -20,11 +38,21 @@
     export default {
         props: ['awaitingNextAction', 'awaitingPreviousAction'],
         computed: {
+            ballXOffset() {
+                return this.previousSyllablesWidth + this.syllableWidth / 2
+            },
             lyric() {
-                return this.lyrics[this.lyricIndex].reduce((acc, lyric, index) => acc + ( index === this.syllableInCurrentLyricIndex ? '<span class="current">' + lyric + '<span>' : lyric ), "" )
+                return this.lyrics[this.lyricIndex]
             },
             syllable() {
                 return this.allSyllables[this.syllableIndex]
+            },
+            previousSyllables() {
+                let syllables = []
+                for(let i = 0; i < this.syllableInCurrentLyricIndex; i++) {
+                    syllables.push(this.lyric[i])
+                }
+                return syllables.join('')
             },
             allSyllables() {
                 return this.lyrics.reduce( (acc, lyric) => acc.concat(lyric), [])
@@ -38,15 +66,15 @@
                 }
                 return lyricIndex
             },
-            syllableInCurrentLyricIndex() {
-                let syllablesInPreviousLyrics = 0
-                let lyricIndex = 0
-                let runningSyllables = this.lyrics[0].length
-                while(syllablesInPreviousLyrics < this.syllableIndex) {
-                    syllablesInPreviousLyrics += this.lyrics[lyricIndex].length
-                    lyricIndex++
+            syllablesInPreviousLyrics() {
+                let syllables = 0
+                for(let i = 0; i < this.lyricIndex; i++) {
+                    syllables += this.lyrics[i].length
                 }
-                return this.syllableIndex - syllablesInPreviousLyrics
+                return syllables
+            },
+            syllableInCurrentLyricIndex() {
+                return this.syllableIndex - this.syllablesInPreviousLyrics
             }
         },
         methods: {
@@ -74,6 +102,15 @@
                 if(this.awaitingNextAction){
                     this.increment()
                     this.$emit('action-updated')
+                    this.$nextTick(() => {
+                        this.previousSyllablesWidth = this.$refs['previous-syllable-width'] ? this.$refs['previous-syllable-width'].clientWidth : 0
+                        this.syllableWidth = this.$refs['syllable-width'] ? this.$refs['syllable-width'].clientWidth : 0
+                        this.bouncing = false
+                        this.$nextTick(() => {
+                            this.bouncing = true
+                            setTimeout(() => this.bouncing = false, 125)
+                        })
+                    })
                 }
             },
             awaitingPreviousAction() {
@@ -86,6 +123,9 @@
         data() {
             return {
                 syllableIndex: 0,
+                previousSyllablesWidth: 0,
+                syllableWidth: 0,
+                bouncing: false,
                 lyrics: 
                     [
                         [
@@ -121,7 +161,7 @@
                             "And ", "the ", "des", "ert ", "was ", "still ", "and ", "the ", "moon", "light ", "was ", "bright"
                         ],
                         [
-                            "And ", "he ", "list'ned", "a", "while ", "as ", "the ", "Kid ", "told ", "his ", "tale"
+                            "And ", "he ", "list'ned ", "a", "while ", "as ", "the ", "Kid ", "told ", "his ", "tale"
                         ],
                         [
                             "Of ", "shoot", "ing ", "the ", "guard ", "at ", "the ", "Las ", "Cru", "ces ", "jail"
@@ -134,7 +174,7 @@
                             "At ", "the ", "age ", "of ", "six", "teen ", "I ", "killed ", "my ", "first ", "man"
                         ],
                         [
-                            "It ", "was ", "out ", "in ", "New ", "Mex", "i", "co, ", "long ", "long ", "ago"
+                            "It ", "was ", "out ", "in ", "New ", "Mex", "i", "co, ", "long ", "long ", "a", "go"
                         ],
                         [
                             "When ", "a ", "man's ", "on", "ly ", "chance ", "was ", "his ", "old ", ".4", "4"
@@ -184,3 +224,34 @@
         }
     }
 </script>
+<style scoped>
+    .current {
+        color: red;
+    }
+    .ball-container {
+        transition: transform 0.25s;
+        top: -30px;
+    }
+    .ball {
+        width: 20px;
+        height: 20px;
+        right: 0px;
+        background-color: red;
+        animation-duration: 0.125s;
+        animation-fill-mode: both;
+    }
+    .ball.bouncing {
+        animation-name: bouncing;
+    }
+    @keyframes bouncing {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-50px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+</style>
