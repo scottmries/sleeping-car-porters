@@ -49,6 +49,7 @@ export default {
 </script>
 <style scoped>
     .number {
+        color: red;
         font-size: 80vh;
     }
 </style>

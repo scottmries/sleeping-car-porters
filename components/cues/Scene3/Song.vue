@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-col justify-end h-full text-3xl">
-        <div class="text-white flex justify-center align-end">
+    <div class="flex flex-col justify-center h-full text-3xl">
+        <div class="text-white flex justify-center align-center">
             <div>
                 <div class="relative">
                     <template v-for="(syllable, index) in lyric">
@@ -9,10 +9,10 @@
                     <div style="opacity: 1;">
                         <div 
                             class="relative"
-                            style="opacity: 1; background: red;" >
+                            style="opacity: 0; background: red;" >
                                 <span v-html="previousSyllables" style="display: inline-block;" ref="previous-syllable-width"></span>
                             <span v-html="syllable" 
-                                style="opacity: 1; background: blue; display: inline-block;" 
+                                style="opacity: 0; background: blue; display: inline-block;" 
                                 ref="syllable-width"></span>
                         </div>
                     </div>
@@ -217,16 +217,17 @@
                         ],
                         [
                             "And ", "this ", "was ", "the ", "last ", "song ", "of ", "Bil", "ly ", "the ", "Kid"
-                        ]
+                        ],
+                        [""]
                     ]
-
             }
         }
     }
 </script>
 <style scoped>
     .current {
-        color: red;
+        color: white;
+        border-bottom: solid 2px white;
     }
     .ball-container {
         transition: transform 0.25s;
@@ -236,7 +237,7 @@
         width: 20px;
         height: 20px;
         right: 0px;
-        background-color: red;
+        background-color: white;
         animation-duration: 0.125s;
         animation-fill-mode: both;
     }

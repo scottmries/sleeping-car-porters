@@ -1,5 +1,7 @@
 <template>
   <div class="aspect-ratio-container">
+    <link href="https://fonts.googleapis.com/css?family=Holtwood+One+SC|Lato:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alatsi|Ultra&display=swap" rel="stylesheet">
     <nuxt />
   </div>
 </template>

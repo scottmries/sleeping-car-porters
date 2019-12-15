@@ -1,6 +1,7 @@
 <template>
     <div class="w-full h-full flex justify-center items-center opacity-0 video-container">
-        <video src="~/assets/videos/fatamorgana.mp4" autoplay controls="false" loop="false" width="962" height="720" muted :style="`filter: url(#displacement) blur(${blur});`"></video> 
+        <video src="~/assets/videos/fatamorgana.mp4" autoplay loop width="962" height="720" muted 
+            :style="`filter: url(#displacement) brightness(8) contrast(2) blur(${blur});`"></video> 
         <svg xmlns="http://www.w3.org/2000/svg" id="image" version="1.1">
             <defs>  
                 <filter id="displacement" x="0%" y="0%" height="100%" width="100%">
@@ -50,8 +51,5 @@ export default {
         animation-name: fadeIn;
         animation-duration: 5s;
         animation-fill-mode: both;
-    }
-    video {
-        filter: blur(10px);
     }
 </style>

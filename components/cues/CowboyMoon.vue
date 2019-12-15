@@ -23,7 +23,7 @@ export default {
     data(){
         return {
             gradientCenter: 87.5,
-            gradientStop: 60
+            gradientStop: 80
         }
     },
     methods: {
@@ -51,12 +51,12 @@ export default {
         z-index: -1;
         transform: scale(1.2) translateX(-10%) translateY(10%);
         transition: 10s;
-        filter: saturate(0);
+        filter: contrast(1) brightness(1) saturate(0);
     }
     img.brighten {
-        filter: saturate(1);
-        animation-name: grow;
-        animation-duration: 1000s;
+        filter: contrast(1) brightness(1.2) saturate(10);
+        animation-name: shrink;
+        animation-duration: 250s;
         animation-fill-mode: both;
     }
 
@@ -69,12 +69,12 @@ export default {
         }
     }
 
-    @keyframes grow {
+    @keyframes shrink {
         from {
             transform: scale(1.2) translateX(-10%) translateY(10%);
         }
         to {
-            transform: scale(3) translateX(-10%) translateY(10%);
+            transform: scale(0) translateX(-10%) translateY(10%);
         }
     }
 </style>

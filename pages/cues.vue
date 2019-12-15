@@ -1,5 +1,5 @@
 <template>
-    <div class="container text-white">
+    <div class="container text-white cursor-none" style="cursor: none !important;">
         <component 
             v-bind:is="sceneName"
             :awaiting-next-cue="awaitingNextCue"
@@ -47,7 +47,7 @@ export default {
     methods: {
         keyup(e) {
             const numbers = [...Array(10).keys()].map(key => key.toString())
-            const cueIndices = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']
+            const cueIndices = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[']
             if(numbers.indexOf(e.key) > -1){
                 this.sceneNumber = e.key
             }
@@ -62,6 +62,7 @@ export default {
                     this.awaitingNextCue = true
                     break
                 case 'n':
+                case 'Enter':
                     this.awaitingNextAction = true
                     break
                 default:

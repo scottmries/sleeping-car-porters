@@ -10,13 +10,14 @@ import scene from '~/components/scenes/Scene'
 import Numeral3 from '~/components/numerals/3'
 import FataMorgana from '~/components/cues/FataMorgana'
 import Song from '~/components/cues/Scene3/Song'
+import Black from '~/components/scenes/Black'
 
 export default {
     extends: scene,
-    components: { Numeral3, FataMorgana, Song },
+    components: { Numeral3, FataMorgana, Song, Black },
     data() {
         return {
-            cues: [ 'Numeral3', 'FataMorgana', 'Song' ],
+            cues: [ 'Numeral3', 'FataMorgana', 'Song', 'Black' ],
             sceneNumber: 3
         }
     }

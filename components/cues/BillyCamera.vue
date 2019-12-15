@@ -1,7 +1,7 @@
 <template>
     <div class="relative camera-container overflow-hidden" :style="{ 'transform' : `rotateZ(${rotation}deg)` }">
         <canvas width="630" height="468" ref="canvas"></canvas>
-        <img ref="image" class="absolute" src="http://192.168.1.5:4747/mjpegfeed?640x480" />
+        <img ref="image" class="absolute" :src="`http://192.168.0.${ip}:4747/mjpegfeed?640x480`" />
     </div>
 </template>
 <script>
@@ -17,17 +17,29 @@ export default {
     data() {
         return {
             context: null,
+            ip: 56
         }
     },
     mounted() {
         this.context = this.$refs['canvas'].getContext('2d')
+        console.log('mounted')
+    },
+    destroyed() {
+        this.context = null
     },
     methods: {
+        changeIp() {
+            this.ip = this.ip === 56 ? 57 : 56
+        },
         copy() {
             const sourceImage = this.$refs['image']
             const imageWidth = sourceImage.offsetWidth
             const imageHeight = sourceImage.offsetHeight
-            this.context.drawImage(sourceImage, 0, -12)
+            try{
+                this.context.drawImage(sourceImage, 0, -12)
+            } catch (err)  {
+
+            }
             this.drawBorders()
         },
         drawBorders() {
@@ -61,7 +73,7 @@ export default {
 </script>
 <style scoped>
     canvas {
-        transform: translateX(225px);
+        transform: translateX(350px);
     }
     img {
         transform: translateX(10000px);    

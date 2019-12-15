@@ -9,13 +9,15 @@
 import scene from '~/components/scenes/Scene'
 import Numeral5 from '~/components/numerals/5'
 import Camera from '~/components/cues/BillyCamera'
+import Black from '~/components/scenes/Black'
+import Newspaper from '~/components/cues/Newspaper'
 
 export default {
     extends: scene,
-    components: { Numeral5, Camera },
+    components: { Numeral5, Black, Camera, Newspaper },
     data() {
         return {
-            cues: [ Numeral5, Camera ],
+            cues: [ Numeral5, Black, Newspaper, Camera, Black ],
             sceneNumber: 5
         }
     },
