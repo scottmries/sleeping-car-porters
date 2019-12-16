@@ -3,7 +3,7 @@
         <div class="relative w-full h-full" :class="{ 'fade-in' : fadeIn }">
             <div class="absolute top-0" :style="{ height: `${videoHeight}px`, width: `${videoWidth}px` }">
                 <video src="~/assets/videos/unforgiving-forest.mp4" autoplay muted loop="true" :width="videoWidth" :height="videoHeight" 
-                    :style="`filter: brightness(${brightness}) contrast(${contrast}) saturate(0);`"
+                    :style="`filter: brightness(${brightness}) contrast(${contrast}) saturate(0) scale(100);`"
                     :class="{ 'fade-in' : fadeIn }"
                 ></video>
             </div>
