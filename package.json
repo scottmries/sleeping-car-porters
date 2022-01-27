@@ -20,7 +20,7 @@
     "nuxt": "^2.0.0",
     "pug": "2.0.3",
     "pug-plain-loader": "^1.0.0",
-    "three": "^0.109.0"
+    "three": "^0.137.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^1.0.0",
